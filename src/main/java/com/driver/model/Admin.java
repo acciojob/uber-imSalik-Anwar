@@ -1,47 +1,28 @@
 package com.driver.model;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-public class Admin{
+public class Admin {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int adminId;
-    private String adminName;
-    private String adminPassword;
 
-    // one admin can have many customer
-    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
-    private List<Customer> customers = new ArrayList<>();
-    // one admin can also have many drivers
-    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
-    private List<Driver> drivers = new ArrayList<>();
+    private String username;
+
+    private String password;
 
     public Admin() {
     }
 
-    public Admin(int adminId, String adminName, String adminPassword) {
+    public Admin(int adminId, String username, String password) {
         this.adminId = adminId;
-        this.adminName = adminName;
-        this.adminPassword = adminPassword;
-    }
-
-    public List<Driver> getDrivers() {
-        return drivers;
-    }
-
-    public void setDrivers(List<Driver> drivers) {
-        this.drivers = drivers;
-    }
-
-    public List<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
+        this.username = username;
+        this.password = password;
     }
 
     public int getAdminId() {
@@ -52,19 +33,19 @@ public class Admin{
         this.adminId = adminId;
     }
 
-    public String getAdminName() {
-        return adminName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getAdminPassword() {
-        return adminPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAdminPassword(String adminPassword) {
-        this.adminPassword = adminPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

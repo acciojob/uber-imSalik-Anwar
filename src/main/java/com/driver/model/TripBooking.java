@@ -1,42 +1,47 @@
 package com.driver.model;
+
 import com.driver.model.TripStatus;
 
 import javax.persistence.*;
 
 @Entity
 public class TripBooking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tripBookingId;
-    @Enumerated(EnumType.STRING)
-    private TripStatus tripStatus;
 
-    private String from;
-    private String to;
+    private String fromLocation;
 
-    private int customerId;
-    @OneToOne
+    private String toLocation;
+
+    private int distanceInKm;
+
+    private TripStatus status;
+
+    private int bill;
+
+    @ManyToOne
     @JoinColumn
-    Cab cab;
+    Driver driver;
+
+    @ManyToOne
+    @JoinColumn
+    Customer customer;
 
     public TripBooking() {
     }
 
-    public TripBooking(int tripBookingId, TripStatus tripStatus, String from, String to, int customerId, Cab cab) {
+    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm,
+                       TripStatus status, int bill, Driver driver, Customer customer) {
         this.tripBookingId = tripBookingId;
-        this.tripStatus = tripStatus;
-        this.from = from;
-        this.to = to;
-        this.customerId = customerId;
-        this.cab = cab;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+        this.fromLocation = fromLocation;
+        this.toLocation = toLocation;
+        this.distanceInKm = distanceInKm;
+        this.status = status;
+        this.bill = bill;
+        this.driver = driver;
+        this.customer = customer;
     }
 
     public int getTripBookingId() {
@@ -47,37 +52,59 @@ public class TripBooking {
         this.tripBookingId = tripBookingId;
     }
 
-
-    public Cab getCab() {
-        return cab;
+    public String getFromLocation() {
+        return fromLocation;
     }
 
-    public void setCab(Cab cab) {
-        this.cab = cab;
+    public void setFromLocation(String fromLocation) {
+        this.fromLocation = fromLocation;
     }
 
-    public TripStatus getTripStatus() {
-        return tripStatus;
+    public String getToLocation() {
+        return toLocation;
     }
 
-    public void setTripStatus(TripStatus tripStatus) {
-        this.tripStatus = tripStatus;
+    public void setToLocation(String toLocation) {
+        this.toLocation = toLocation;
     }
 
-    public String getFrom() {
-        return from;
+    public int getDistanceInKm() {
+        return distanceInKm;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setDistanceInKm(int distanceInKm) {
+        this.distanceInKm = distanceInKm;
     }
 
-    public String getTo() {
-        return to;
+    public TripStatus getStatus() {
+        return status;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setStatus(TripStatus status) {
+        this.status = status;
     }
 
+    public int getBill() {
+        return bill;
+    }
+
+    public void setBill(int bill) {
+        this.bill = bill;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

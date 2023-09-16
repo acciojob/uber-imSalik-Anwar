@@ -1,68 +1,65 @@
 package com.driver.model;
+
 import javax.persistence.*;
 
+
+
 @Entity
-public class Cab{
+public class Cab {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cabId;
+    private int id;
 
-    private int ratePerKm;
-    private Boolean isAvailable;
+    private int perKmRate;
+
+    boolean available;
 
     @OneToOne
     @JoinColumn
     Driver driver;
 
-    @OneToOne(mappedBy = "cab", cascade = CascadeType.ALL)
-    TripBooking tripBooking;
-
     public Cab() {
     }
 
-    public Cab(int cabId, int ratePerKm, Boolean isAvailable) {
-        this.cabId = cabId;
-        this.ratePerKm = ratePerKm;
-        this.isAvailable = isAvailable;
+    public Cab(int id, int perKmRate, boolean available, Driver driver) {
+        this.id = id;
+        this.perKmRate = perKmRate;
+        this.available = available;
+        this.driver = driver;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPerKmRate() {
+        return perKmRate;
+    }
+
+    public void setPerKmRate(int perKmRate) {
+        this.perKmRate = perKmRate;
+    }
+
+    public boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public Driver getDriver() {
         return driver;
     }
 
-    public TripBooking getTripBooking() {
-        return tripBooking;
-    }
-
-    public void setTripBooking(TripBooking tripBooking) {
-        this.tripBooking = tripBooking;
-    }
-
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
 
-    public int getCabId() {
-        return cabId;
-    }
 
-    public void setCabId(int cabId) {
-        this.cabId = cabId;
-    }
-
-    public int getRatePerKm() {
-        return ratePerKm;
-    }
-
-    public void setRatePerKm(int ratePerKm) {
-        this.ratePerKm = ratePerKm;
-    }
-
-    public Boolean getAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(Boolean available) {
-        isAvailable = available;
-    }
 }
